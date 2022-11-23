@@ -1,6 +1,8 @@
 import "./App.css";
+import AdminPage from 'feature/admin';
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 const HomePage = React.lazy(() => import("feature/homepage/HomePage"));
 
@@ -174,10 +176,56 @@ function App() {
               </React.Suspense>
             }
           />
-          <Route path="/orders" element={<React.Suspense fallback={<>Loading...</>}> <Orders /> </React.Suspense>} />
-            <Route path="/orders-detail/:id" element={<React.Suspense fallback={<>Loading...</>}> <OrdersDetail /> </React.Suspense>} />
+          <Route
+            path="/orders"
+            element={
+              <React.Suspense fallback={<>Loading...</>}>
+                {" "}
+                <Orders />{" "}
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/orders-detail/:id"
+            element={
+              <React.Suspense fallback={<>Loading...</>}>
+                {" "}
+                <OrdersDetail />{" "}
+              </React.Suspense>
+            }
+            
+          />
+          <Route
+              path={"admin"}
+              element={
+                <AdminPage />
+              }
+            >
+              <Route
+                path={"category"}
+                element={
+                  <AdminPage />
+                }
+              />
+              <Route
+                path={"product"}
+                element={
+                  <AdminPage />
+                }
+              />
+              <Route
+                path={"order"}
+                element={
+                  <AdminPage />
+                }
+              />
+              </Route>
         </Routes>
       </BrowserRouter>
+      <MessengerCustomerChat
+        pageId="105768935696664"
+        appId="1171088433793483"
+      />
     </div>
   );
 }

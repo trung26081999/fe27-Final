@@ -15,7 +15,7 @@ const Container = styled.div`
     padding: 20px 0;
     width: 90%;
     margin: auto;
-    margin-top: 150px;
+    margin-top: 115px;
 `;
 
 const Title = styled.h1`

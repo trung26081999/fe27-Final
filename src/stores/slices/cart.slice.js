@@ -51,6 +51,14 @@ export const cartSlice = createSlice({
         getListCartActionFailed: (state, action) => {
 
         },
+        getTotalBill: (state, action) => {
+			const total = state?.cartState?.cart?.reduce?.((cartTotal, cartItem) => cartTotal += cartItem.total, 0)
+			state.cartState.total = total
+		},
+		getTotalItem: (state, action) => {
+			const cartItem = state?.cartState?.cart?.reduce?.((cartTotal, cartItem) => cartTotal += cartItem.count, 0)
+			state.cartState.cartItem = cartItem
+		},
         addProductToCartAction: (state, action) => {
             state.cartState = {
                 ...state.cartState,
@@ -113,6 +121,8 @@ export const { addProductToCartAction,
     updateProductCartActionSuccess,
     updateProductCartActionFailed,
     logOutCart,
+    getTotalBill,
+    getTotalItem
 } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

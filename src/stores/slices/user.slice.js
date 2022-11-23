@@ -10,7 +10,7 @@ const userInfoFromStorage = localStorage.getItem(USER_INFO_KEY) ? JSON.parse(loc
 const initialState = {
     userInfoState: {
         token: userInfoFromStorage,
-        data: null,
+        data: userInfoFromStorage,
         loading: false,
         error: null,
         pagination: {
@@ -40,7 +40,7 @@ const userSlice = createSlice({
         loginActionSuccess(state, action) {
             const {token, user} = action.payload;
             // console.log("userInfo",user);
-            localStorage.setItem(USER_INFO_KEY, JSON.stringify(token));
+            localStorage.setItem(USER_INFO_KEY, JSON.stringify(user));
             state.userInfoState = {
                 ...state.userInfoState,
                 loading: false,
