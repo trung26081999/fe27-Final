@@ -1,58 +1,56 @@
-import "./App.css";
-import AdminPage from 'feature/admin';
-import * as React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MessengerCustomerChat from "react-messenger-customer-chat";
+import './App.css'
+// import AdminPage from 'feature/admin';
+import * as React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import MessengerCustomerChat from 'react-messenger-customer-chat'
 
-const HomePage = React.lazy(() => import("feature/homepage/HomePage"));
+const HomePage = React.lazy(() => import('feature/homepage/HomePage'))
 
-const Login = React.lazy(() => import("feature/Login/Login"));
+const Login = React.lazy(() => import('feature/Login/Login'))
 
-const Register = React.lazy(() => import("feature/register/Register"));
+const Register = React.lazy(() => import('feature/register/Register'))
 
 const MensClothing = React.lazy(() =>
-  import("feature/product/product-category/MensClothing")
-);
+  import('feature/product/product-category/MensClothing'),
+)
 
 const WomensClothing = React.lazy(() =>
-  import("feature/product/product-category/WomensClothing")
-);
+  import('feature/product/product-category/WomensClothing'),
+)
 
 const KidsClothing = React.lazy(() =>
-  import("feature/product/product-category/KidsClothing")
-);
+  import('feature/product/product-category/KidsClothing'),
+)
 
 const KidShoes = React.lazy(() =>
-  import("feature/product/product-category/KidShoes")
-);
+  import('feature/product/product-category/KidShoes'),
+)
 
 const WomenShoes = React.lazy(() =>
-  import("feature/product/product-category/WomenShoes")
-);
+  import('feature/product/product-category/WomenShoes'),
+)
 
 const MenShoes = React.lazy(() =>
-  import("feature/product/product-category/MenShoes")
-);
+  import('feature/product/product-category/MenShoes'),
+)
 
-const Cart = React.lazy(() => import("feature/product/product-cart/Cart"));
+const Cart = React.lazy(() => import('feature/product/product-cart/Cart'))
 
 const AllProducts = React.lazy(() =>
-  import("feature/product/product-list/Products")
-);
+  import('feature/product/product-list/Products'),
+)
 
 const ProductSearch = React.lazy(() =>
-  import("feature/product/product-search/ProductSearch")
-);
+  import('feature/product/product-search/ProductSearch'),
+)
 
 const ProductDetail = React.lazy(() =>
-  import("feature/product/product-detail/ProductDetail")
-);
-const Orders = React.lazy(() =>
-  import("feature/product/product-orders/Orders")
-);
+  import('feature/product/product-detail/ProductDetail'),
+)
+const Orders = React.lazy(() => import('feature/product/product-orders/Orders'))
 const OrdersDetail = React.lazy(() =>
-  import("feature/product/product-orders/OrdersDetail")
-);
+  import('feature/product/product-orders/OrdersDetail'),
+)
 
 function App() {
   return (
@@ -63,8 +61,8 @@ function App() {
             index
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <HomePage />{" "}
+                {' '}
+                <HomePage />{' '}
               </React.Suspense>
             }
           />
@@ -72,8 +70,8 @@ function App() {
             path="/login"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <Login />{" "}
+                {' '}
+                <Login />{' '}
               </React.Suspense>
             }
           />
@@ -81,8 +79,8 @@ function App() {
             path="/register"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <Register />{" "}
+                {' '}
+                <Register />{' '}
               </React.Suspense>
             }
           />
@@ -90,8 +88,8 @@ function App() {
             path="/mens-clothing"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <MensClothing />{" "}
+                {' '}
+                <MensClothing />{' '}
               </React.Suspense>
             }
           />
@@ -99,8 +97,8 @@ function App() {
             path="/womens-clothing"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <WomensClothing />{" "}
+                {' '}
+                <WomensClothing />{' '}
               </React.Suspense>
             }
           />
@@ -108,8 +106,8 @@ function App() {
             path="/kids-clothing"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <KidsClothing />{" "}
+                {' '}
+                <KidsClothing />{' '}
               </React.Suspense>
             }
           />
@@ -117,8 +115,8 @@ function App() {
             path="/kids-shoes"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <KidShoes />{" "}
+                {' '}
+                <KidShoes />{' '}
               </React.Suspense>
             }
           />
@@ -126,8 +124,8 @@ function App() {
             path="/womens-shoes"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <WomenShoes />{" "}
+                {' '}
+                <WomenShoes />{' '}
               </React.Suspense>
             }
           />
@@ -135,8 +133,8 @@ function App() {
             path="/mens-shoes"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <MenShoes />{" "}
+                {' '}
+                <MenShoes />{' '}
               </React.Suspense>
             }
           />
@@ -144,8 +142,8 @@ function App() {
             path="/cart"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <Cart />{" "}
+                {' '}
+                <Cart />{' '}
               </React.Suspense>
             }
           />
@@ -153,8 +151,8 @@ function App() {
             path="/all-products"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <AllProducts />{" "}
+                {' '}
+                <AllProducts />{' '}
               </React.Suspense>
             }
           />
@@ -162,8 +160,8 @@ function App() {
             path="/products-search/:q"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <ProductSearch />{" "}
+                {' '}
+                <ProductSearch />{' '}
               </React.Suspense>
             }
           />
@@ -171,8 +169,8 @@ function App() {
             path="/products-detail/:id"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <ProductDetail />{" "}
+                {' '}
+                <ProductDetail />{' '}
               </React.Suspense>
             }
           />
@@ -180,8 +178,8 @@ function App() {
             path="/orders"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <Orders />{" "}
+                {' '}
+                <Orders />{' '}
               </React.Suspense>
             }
           />
@@ -189,13 +187,12 @@ function App() {
             path="/orders-detail/:id"
             element={
               <React.Suspense fallback={<>Loading...</>}>
-                {" "}
-                <OrdersDetail />{" "}
+                {' '}
+                <OrdersDetail />{' '}
               </React.Suspense>
             }
-            
           />
-          <Route
+          {/* <Route
               path={"admin"}
               element={
                 <AdminPage />
@@ -219,7 +216,7 @@ function App() {
                   <AdminPage />
                 }
               />
-              </Route>
+              </Route> */}
         </Routes>
       </BrowserRouter>
       <MessengerCustomerChat
@@ -227,7 +224,7 @@ function App() {
         appId="1171088433793483"
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
