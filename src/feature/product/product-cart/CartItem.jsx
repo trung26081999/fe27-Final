@@ -1,106 +1,157 @@
-import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { deleteProductCartAction, getListCartAction, updateProductCartAction } from "stores/slices/cart.slice";
-import styled from "styled-components";
+import { DeleteOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons'
+import { Modal } from 'antd'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import {
+  deleteProductCartAction,
+  getListCartAction,
+  updateProductCartAction,
+} from 'stores/slices/cart.slice'
+import styled from 'styled-components'
 
 const ProductImg = styled.div`
-height: 150px;
-`;
+  height: 150px;
+`
 
 const ProductDetail = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-border-bottom: 1px solid rgba(0,0,0,.09);
-color: #000000;
-height: 160px;
-`;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  color: #000000;
+  height: 160px;
+`
 
 const Image = styled.img`
-width: 100%;
-height: 100%;
-object-fit: cover;
-`;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
 
 const Details = styled.div`
-flex: 25%;
-padding: 20px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-`;
+  flex: 25%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`
 
-const ProductName = styled.span``;
+const ProductName = styled.span``
 
-const ProductSize = styled.span``;
+const ProductSize = styled.span``
 
 const PriceDetail = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-flex: 16%;
-`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 16%;
+`
 
 const ProductAmountContainer = styled.div`
-display: flex;
-align-items: center;
-cursor: pointer;
-font-size: 16px;
-font-weight: 500;
-`;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+`
 
 const ProductAmount = styled.div`
-margin: 0 10px;
-`;
+  margin: 0 10px;
+`
 
 const ProductPrice = styled.div`
-flex: 16%;
-font-size: 16px;
-font-weight: 500;
-`;
+  flex: 16%;
+  font-size: 16px;
+  font-weight: 500;
+`
 
 export function CartItem({ data }) {
-    const [quantity, setQuantity] = useState(data.quantity ?? 1);
-    const dispatch = useDispatch();
-    
-    const handleDeleteProduct = () => {
-        if (window.confirm('You want to delete this product ?')) {
-            dispatch(deleteProductCartAction(data.id));
-            dispatch(getListCartAction());
-        }
+  const [quantity, setQuantity] = useState(data.quantity ?? 1)
+  const dispatch = useDispatch()
+  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false)
+
+  const handleDeleteProduct = () => {
+    if (window.confirm('You want to delete this product ?')) {
+      dispatch(deleteProductCartAction(data.id))
+      dispatch(getListCartAction())
     }
+  }
 
-    const handlePlusQuantity = () => {
-        if (quantity < 100) {
-        setQuantity(quantity + 1);
-        dispatch(updateProductCartAction({id: data.id, data: { quantity: quantity + 1}}));
-        dispatch(getListCartAction());
-    }}
+  const handlePlusQuantity = () => {
+    if (quantity < 100) {
+      setQuantity(quantity + 1)
+      dispatch(
+        updateProductCartAction({
+          id: data.id,
+          data: { quantity: quantity + 1 },
+        }),
+      )
+      dispatch(getListCartAction())
+    }
+  }
 
-    const handleMinusQuantity = () => {
-        if (quantity > 1) {
-        setQuantity(quantity - 1);
-        dispatch(updateProductCartAction({id: data.id, data: { quantity: quantity - 1}}));
-        dispatch(getListCartAction());
-    }}
-    const amountOfMoney = data.quantity*data.price;
+  const handleMinusQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
+      dispatch(
+        updateProductCartAction({
+          id: data.id,
+          data: { quantity: quantity - 1 },
+        }),
+      )
+    //   toast.info('Decreased product quantity', {
+    //     position: 'bottom-left',
+    //   })
+      dispatch(getListCartAction())
+    } else if (quantity === 1) {
+      setShowConfirmDeleteModal(true)
+      // toast.error('Product removed from cart', {
+      //   position: 'bottom-left',
+      // })
+    }
+  }
+  const amountOfMoney = data.quantity * data.price
 
-    return (<ProductDetail>
-        <ProductImg><Image src={data.img} /></ProductImg>
+  return (
+    <>
+      <Modal
+        title="Basic Modal"
+        open={showConfirmDeleteModal}
+        onOk={() => {
+          dispatch(deleteProductCartAction(data?.id))
+          dispatch(getListCartAction())
+        }}
+        onCancel={() => {
+          setShowConfirmDeleteModal(false)
+        }}
+      >
+        <p>Do you sure want to delete product of the cart</p>
+      </Modal>
+      <ProductDetail>
+        <ProductImg>
+          <Image src={data.img} />
+        </ProductImg>
         <Details>
-            <ProductName>{data.name}</ProductName>
-            <ProductSize>Size: {data.size}</ProductSize>
+          <ProductName>{data.name}</ProductName>
+          <ProductSize>Size: {data.size}</ProductSize>
         </Details>
         <ProductPrice>{data.price}$</ProductPrice>
         <PriceDetail>
-            <ProductAmountContainer>
-                <MinusOutlined onClick={handleMinusQuantity} />
-                <ProductAmount>{quantity}</ProductAmount>
-                <PlusOutlined onClick={handlePlusQuantity} />
-            </ProductAmountContainer>
+          <ProductAmountContainer>
+            <MinusOutlined onClick={handleMinusQuantity} />
+            <ProductAmount>{quantity}</ProductAmount>
+            <PlusOutlined onClick={handlePlusQuantity} />
+          </ProductAmountContainer>
         </PriceDetail>
         <ProductPrice>{amountOfMoney}$</ProductPrice>
-        <ProductPrice><DeleteOutlined onClick={handleDeleteProduct} style={{ fontSize: "25px", cursor: "pointer" }} /></ProductPrice>
-    </ProductDetail>)
+        <ProductPrice>
+          <DeleteOutlined
+            onClick={handleDeleteProduct}
+            style={{ fontSize: '25px', cursor: 'pointer' }}
+          />
+        </ProductPrice>
+      </ProductDetail>
+    </>
+  )
 }
